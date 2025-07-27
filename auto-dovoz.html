@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="cs" style="scroll-behavior: smooth;">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Auta Dovoz - Váš specialista na dovoz prověřených vozů</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --c-white: #ffffff;
+            --c-gray-100: #f8f9fa;
+            --c-gray-200: #e9ecef;
+            --c-gray-300: #dee2e6;
+            --c-gray-700: #495057;
+            --c-gray-800: #343a40;
+            --c-gray-900: #212529;
+            --c-primary: var(--c-gray-700); /* CHANGED: Blue to Gray */
+            --c-primary-dark: var(--c-gray-800); /* CHANGED: Dark Blue to Dark Gray */
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            line-height: 1.6;
+            color: var(--c-gray-900);
+            background-color: var(--c-white);
+        }
+
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
+        section { padding: 100px 0; }
+        h1, h2, h3, h4 { font-weight: 600; }
+        h2 { font-size: 2.8rem; text-align: center; margin-bottom: 1.5rem; }
+        .section-subtitle { text-align: center; font-size: 1.15rem; color: var(--c-gray-700); margin-bottom: 60px; max-width: 700px; margin-left: auto; margin-right: auto; }
+        .button { background-color: var(--c-primary); color: var(--c-white); border: none; padding: 14px 28px; border-radius: 8px; font-size: 1rem; font-weight: 500; cursor: pointer; text-decoration: none; transition: background-color 0.2s ease, transform 0.2s ease; display: inline-block; }
+        .button:hover { background-color: var(--c-primary-dark); transform: translateY(-2px); }
+        .section-gray { background-color: var(--c-gray-100); }
+
+        /* Header */
+        header { background: rgba(255, 255, 255, 0.85); backdrop-filter: blur(10px); padding: 1rem 0; border-bottom: 1px solid var(--c-gray-200); position: sticky; top: 0; z-index: 1000; }
+        .header-content { display: flex; justify-content: space-between; align-items: center; }
+        .logo { font-size: 1.8rem; font-weight: 700; color: var(--c-gray-800); text-decoration: none; }
+        nav ul { display: flex; list-style: none; gap: 30px; }
+        nav a { text-decoration: none; color: var(--c-gray-900); font-weight: 500; transition: color 0.2s; }
+        nav a:hover { color: var(--c-primary); }
+
+        /* Hero Section */
+        .hero { padding: 80px 0; }
+        .hero-content { display: grid; grid-template-columns: 1fr 1.2fr; gap: 60px; align-items: center; }
+        .hero-text h1 { font-size: 3.8rem; line-height: 1.2; margin-bottom: 1.5rem; font-weight: 700; }
+        .hero-text p { font-size: 1.2rem; margin-bottom: 2.5rem; color: var(--c-gray-700); }
+        .hero-image-wrapper img { width: 100%; height: auto; border-radius: 16px; box-shadow: 0 20px 40px -10px rgba(0, 0, 0, 0.15); }
+        
+        /* Inquiry Form */
+        .inquiry-form { background: var(--c-white); border-radius: 16px; padding: 30px; box-shadow: 0 15px 40px rgba(0,0,0,0.1); display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 20px; align-items: end; }
+        .form-group { display: flex; flex-direction: column; }
+        .form-group label { margin-bottom: 8px; font-weight: 500; color: var(--c-gray-700); font-size: 0.9rem; }
+        .form-group input, .form-group textarea { padding: 12px; border: 1px solid var(--c-gray-300); border-radius: 8px; font-size: 1rem; width: 100%; font-family: 'Inter', sans-serif; }
+        .form-group input:focus, .form-group textarea:focus { outline: 2px solid var(--c-primary); border-color: transparent; }
+        .inquiry-form .button { width: 100%; height: 49px; }
+        
+        /* Categories Section */
+        .categories-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 25px; }
+        .category-card { background: var(--c-white); border-radius: 12px; padding: 25px; text-align: center; border: 1px solid var(--c-gray-200); transition: transform 0.2s, box-shadow 0.2s; }
+        .category-card:hover { transform: translateY(-5px); box-shadow: 0 8px 25px rgba(0, 0, 0, 0.07); }
+        .category-icon { margin-bottom: 15px; color: var(--c-primary); }
+        .category-icon svg { width: 48px; height: 48px; }
+        .category-title { font-size: 1.1rem; font-weight: 600; }
+        
+        /* Services Section */
+        .services-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 30px; }
+        .service-card { background: var(--c-white); border-radius: 12px; padding: 30px; display: flex; flex-direction: column; gap: 15px; border: 1px solid var(--c-gray-200); }
+        .service-icon { color: var(--c-primary); }
+        .service-icon svg { width: 36px; height: 36px; }
+        .service-title { font-size: 1.25rem; font-weight: 600; }
+        .service-description { color: var(--c-gray-700); }
+
+        /* Car Listings */
+        .car-card { background: var(--c-white); border-radius: 16px; overflow: hidden; box-shadow: 0 8px 30px rgba(0,0,0,0.08); transition: transform 0.3s; }
+        .car-card:hover { transform: translateY(-5px); }
+        .car-image { height: 220px; background-size: cover; background-position: center; }
+        .car-info { padding: 25px; border-top: 1px solid var(--c-gray-200); }
+        .car-title { font-size: 1.3rem; margin-bottom: 8px; }
+        .car-details { display: flex; flex-wrap: wrap; gap: 15px; color: var(--c-gray-700); font-size: 0.9rem; margin-bottom: 20px; }
+        .car-price-wrapper { display: flex; justify-content: space-between; align-items: center; }
+        .car-price { font-size: 1.6rem; font-weight: 700; color: var(--c-primary); }
+        
+        /* Contact Section */
+        .contact-layout { display: grid; grid-template-columns: 1fr 1.5fr; gap: 60px; align-items: flex-start; }
+        .contact-info-item { display: flex; align-items: flex-start; gap: 20px; margin-bottom: 25px; }
+        .contact-info-item .icon { color: var(--c-primary); width: 24px; flex-shrink: 0; margin-top: 4px; }
+        .contact-info-item h4 { margin-bottom: 5px; font-size: 1.1rem; }
+        .contact-info-item p, .contact-info-item a { color: var(--c-gray-700); text-decoration: none; }
+        .contact-form .form-group { margin-bottom: 20px; }
+        .contact-form textarea { min-height: 120px; resize: vertical; }
+
+        /* Footer */
+        footer { background: var(--c-gray-900); color: var(--c-white); padding: 80px 0 30px; }
+        .footer-content { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 40px; }
+        .footer-section h3 { color: var(--c-white); margin-bottom: 20px; }
+        .footer-section ul { list-style: none; }
+        .footer-section a { color: var(--c-gray-300); text-decoration: none; transition: color 0.2s; }
+        .footer-section a:hover { color: var(--c-white); }
+        .footer-bottom { text-align: center; margin-top: 60px; padding-top: 30px; border-top: 1px solid var(--c-gray-700); color: var(--c-gray-300); }
+        
+        /* Responsive */
+        @media (max-width: 992px) {
+            nav { display: none; }
+            .hero-content { grid-template-columns: 1fr; text-align: center; }
+            .hero-image-wrapper { display: none; }
+        }
+        @media (max-width: 768px) {
+            h2 { font-size: 2.2rem; }
+            section { padding: 60px 0; }
+            .contact-layout { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="container header-content">
+            <a href="#" class="logo">Auta Dovoz</a>
+            <nav>
+                <ul>
+                    <li><a href="#services">Služby</a></li>
+                    <li><a href="#cars">Vozy</a></li>
+                    <li><a href="#contact">Kontakt</a></li>
+                </ul>
+            </nav>
+            <a href="#contact" class="button">Poptávka</a>
+        </div>
+    </header>
+
+    <main>
+        <section class="hero">
+            <div class="container">
+                <div class="hero-content">
+                    <div class="hero-text">
+                        <h1>Váš vůz ze zahraničí. Snadno a bezpečně.</h1>
+                        <p>Specializujeme se na dovoz prověřených vozů z Německa a celé EU. Najdeme vám auto snů a postaráme se o veškerou administrativu.</p>
+                        <a href="#inquiry" class="button">Nezávazně poptat vůz</a>
+                    </div>
+                    <div class="hero-image-wrapper">
+                        <img src="https://images.unsplash.com/photo-1552519507-da3b142c6e3d?auto=format&fit=crop&w=800&q=80" alt="Luxusní modré auto stojící na silnici">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="inquiry" class="section-gray">
+            <div class="container">
+                 <h2 style="font-size: 1.8rem; margin-bottom: 2rem;">Najděte si svůj vůz</h2>
+                <form class="inquiry-form">
+                    <div class="form-group"><label for="brand">Značka</label><input type="text" id="brand" placeholder="Např. BMW"></div>
+                    <div class="form-group"><label for="model">Model</label><input type="text" id="model" placeholder="Např. Řada 5"></div>
+                    <div class="form-group"><label for="year">Rok od</label><input type="number" id="year" placeholder="2020"></div>
+                    <div class="form-group"><label for="price">Cena do</label><input type="text" id="price" placeholder="900 000 Kč"></div>
+                    <button type="submit" class="button">Najít mi auto</button>
+                </form>
+            </div>
+        </section>
+        
+        <section id="categories" class="categories">
+            <div class="container">
+                <h2 class="section-title">Populární kategorie pro dovoz</h2>
+                <div class="categories-grid">
+                    <div class="category-card"><div class="category-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg></div><h3 class="category-title">Prémiové vozy</h3></div>
+                    <div class="category-card"><div class="category-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 19V8.5a2.5 2.5 0 0 0-5 0V19"/><line x1="14" y1="14" x2="9" y2="14"/><path d="M20 19V5a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v14"/><path d="M4 19h16"/></svg></div><h3 class="category-title">Rodinná SUV</h3></div>
+                    <div class="category-card"><div class="category-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m21.6 11.4-1.2-4.8C20.1 5.5 19.2 5 18.1 5H5.9c-1.1 0-2 .5-2.3 1.6L2.4 11.4c-.2.7.3 1.6.9 1.6h16.8c.7 0 1.1-.9.9-1.6z"/><path d="m5 17 1.2-4.8"/><path d="m19 17-1.2-4.8"/></svg></div><h3 class="category-title">Sportovní vozy</h3></div>
+                    <div class="category-card"><div class="category-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22v-2"/><path d="M8.5 15H12a4 4 0 0 0 4-4v-3"/><path d="M5 15H3c-.6 0-1-.4-1-1v-2c0-.6.4-1 1-1h2"/><path d="M21 15h-2c-.6 0-1-.4-1-1v-2c0-.6.4-1 1-1h2"/><line x1="7" y1="11" x2="17" y2="11"/></svg></div><h3 class="category-title">Hybrid & Elektro</h3></div>
+                    <div class="category-card"><div class="category-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 18h-4.3a2 2 0 0 1-1.4-3.4L14 12l-2-3-4.4 4.4a2 2 0 0 1-2.8 0L2 10"/><path d="M18 18v-4.5"/><path d="M12.5 12.5 15 10l-2.5-2.5"/><path d="m17 13 2.5 2.5-2.5 2.5"/></svg></div><h3 class="category-title">Zánovní vozy</h3></div>
+                </div>
+            </div>
+        </section>
+
+        <section id="services" class="services">
+            <div class="container">
+                <h2 class="section-title">Kompletní servis dovozu</h2>
+                <p class="section-subtitle">S námi je dovoz auta hračka. O vše se postaráme za vás, abyste vy nemuseli.</p>
+                <div class="services-grid">
+                    <div class="service-card"><div class="service-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line><line x1="11" y1="8" x2="11" y2="14"></line><line x1="8" y1="11" x2="14" y2="11"></line></svg></div><div><h3 class="service-title">Prověření vozu v zahraničí</h3><p class="service-description">Zkontrolujeme kompletní historii, servisní záznamy a reálný stav vozu přímo na místě.</p></div></div>
+                    <div class="service-card"><div class="service-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg></div><div><h3 class="service-title">Vyřízení veškeré dokumentace</h3><p class="service-description">Zajistíme kupní smlouvy, exportní doklady a veškerou administrativu spojenou s nákupem.</p></div></div>
+                    <div class="service-card"><div class="service-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="3" width="15" height="13"></rect><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"></polygon><circle cx="5.5" cy="18.5" r="2.5"></circle><circle cx="18.5" cy="18.5" r="2.5"></circle></svg></div><div><h3 class="service-title">Pojištěná doprava do ČR</h3><p class="service-description">Vaše nové auto bezpečně přepravíme pojištěnou dopravou až k nám na pobočku.</p></div></div>
+                    <div class="service-card"><div class="service-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path><polyline points="9 12 11 14 15 10"></polyline></svg></div><div><h3 class="service-title">Přihlášení a záruka</h3><p class="service-description">Absolvujeme dovozovou STK, emise a zajistíme registraci i prodlouženou záruku.</p></div></div>
+                </div>
+            </div>
+        </section>
+
+        <section id="cars" class="car-listings section-gray">
+            <div class="container">
+                <h2 class="section-title">Aktuálně v nabídce</h2>
+                <p class="section-subtitle">Vybrané vozy, které jsme nedávno dovezli a jsou připraveny k okamžitému odběru.</p>
+                <div class="cars-grid" style="grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));">
+                    <div class="car-card">
+                        <div class="car-image" style="background-image: url('https://images.unsplash.com/photo-1616421233882-1f24a09843b0?auto=format&fit=crop&w=800&q=80');"></div>
+                        <div class="car-info">
+                            <h3 class="car-title">Audi A6 Avant 50 TDI</h3>
+                            <div class="car-details"><span>2021</span><span>85 000 km</span><span>Nafta</span><span>Automat</span></div>
+                            <div class="car-price-wrapper"><div class="car-price">950 000 Kč</div><a href="#" class="button" style="padding: 10px 20px;">Detail vozu</a></div>
+                        </div>
+                    </div>
+                    <div class="car-card">
+                        <div class="car-image" style="background-image: url('https://images.unsplash.com/photo-1611312334839-a953d6a78244?auto=format&fit=crop&w=800&q=80');"></div>
+                        <div class="car-info">
+                            <h3 class="car-title">Volvo XC90 B5 Inscription</h3>
+                            <div class="car-details"><span>2022</span><span>45 000 km</span><span>Hybrid</span><span>Automat</span></div>
+                            <div class="car-price-wrapper"><div class="car-price">1 250 000 Kč</div><a href="#" class="button" style="padding: 10px 20px;">Detail vozu</a></div>
+                        </div>
+                    </div>
+                    <div class="car-card">
+                        <div class="car-image" style="background-image: url('https://images.unsplash.com/photo-1628133038933-f8d8b6a35368?auto=format&fit=crop&w=800&q=80');"></div>
+                        <div class="car-info">
+                            <h3 class="car-title">VW Passat Alltrack 2.0 TDI</h3>
+                            <div class="car-details"><span>2020</span><span>110 000 km</span><span>Nafta</span><span>DSG</span></div>
+                            <div class="car-price-wrapper"><div class="car-price">680 000 Kč</div><a href="#" class="button" style="padding: 10px 20px;">Detail vozu</a></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="contact" class="section-gray">
+            <div class="container">
+                <h2 class="section-title">Napište nám</h2>
+                <p class="section-subtitle">Máte dotaz nebo chcete zahájit proces dovozu? Zanechte nám zprávu a my se vám co nejdříve ozveme.</p>
+                <div class="contact-layout">
+                    <div class="contact-info">
+                        <h3>Kontaktní údaje</h3>
+                        <p>Neváhejte se na nás obrátit. Jsme tu pro vás každý všední den od 8:00 do 18:00.</p>
+                        <br>
+                        <div class="contact-info-item">
+                            <div class="icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg></div>
+                            <div><h4>Telefon</h4><p><a href="tel:+420777123456">+420 777 123 456</a></p></div>
+                        </div>
+                        <div class="contact-info-item">
+                            <div class="icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg></div>
+                            <div><h4>Email</h4><p><a href="mailto:info@autadovoz.cz">info@autadovoz.cz</a></p></div>
+                        </div>
+                         <div class="contact-info-item">
+                            <div class="icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg></div>
+                            <div><h4>Adresa</h4><p>Ukázková 123, 110 00 Praha 1</p></div>
+                        </div>
+                    </div>
+                    <form class="contact-form">
+                        <div class="form-group"><label for="name">Vaše jméno</label><input type="text" id="name" required></div>
+                        <div class="form-group"><label for="email">Váš email</label><input type="email" id="email" required></div>
+                        <div class="form-group"><label for="subject">Předmět</label><input type="text" id="subject"></div>
+                        <div class="form-group"><label for="message">Vaše zpráva</label><textarea id="message" required></textarea></div>
+                        <button type="submit" class="button">Odeslat zprávu</button>
+                    </form>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section"><h3>Auta Dovoz</h3><p>Specialisté na dovoz prověřených vozů z EU. Najdeme vám auto snů a postaráme se o vše ostatní.</p></div>
+                <div class="footer-section"><h3>Služby</h3><ul><li><a href="#">Dovoz z Německa</a></li><li><a href="#">Prověření historie</a></li><li><a href="#">Přihlášení vozu</a></li><li><a href="#">Výkup protiúčtem</a></li></ul></div>
+                <div class="footer-section"><h3>Rychlé odkazy</h3><ul><li><a href="#services">Služby</a></li><li><a href="#cars">Vozy v nabídce</a></li><li><a href="#contact">Kontakt</a></li></ul></div>
+                <div class="footer-section"><h3>Kontakt</h3><p>Po-Pá: 8:00 - 18:00</p><p>+420 777 123 456</p><p>info@autadovoz.cz</p></div>
+            </div>
+            <div class="footer-bottom"><p>&copy; 2025 Auta Dovoz. Všechna práva vyhrazena.</p></div>
+        </div>
+    </footer>
+
+</body>
+</html>
